@@ -1,0 +1,2 @@
+echo "Building DPP-GUI"
+docker build --no-cache --rm -t estcube/dpp-gui .

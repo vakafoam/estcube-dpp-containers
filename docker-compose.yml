@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+
+  gui:
+    build:
+      context: ./GUI
+      dockerfile: Dockerfile
+    ports:
+      - "8262:8200"
+      
+  web_scipy:
+    build:
+      context: ./web_SciPy
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+     - "8260:5000"
+    depends_on:
+      - redis
+    volumes:
+      - ./SciPy:/web_SciPy/SciPy
+  
+  worker_scipy:
+    build:
+      context: ./worker_SciPy
+      dockerfile: Dockerfile
+    depends_on:
+      - redis
+    volumes:
+      - ./SciPy:/worker_SciPy/SciPy
+  
+  redis:
+    image: redis

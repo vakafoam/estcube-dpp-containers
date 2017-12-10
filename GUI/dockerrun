@@ -1,0 +1,2 @@
+echo "Building DPP-GUI"
+docker run -d --name dpp-gui --restart=always -p 8200:8200 --net=estcube-mcs-bridge --net-alias=dpp-gui --privileged estcube/dpp-gui
