@@ -29,6 +29,27 @@ services:
       - redis
     volumes:
       - ./SciPy:/worker_SciPy/SciPy
+
+  web_r:
+    build:
+      context: ./web_R
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+     - "8261:5000"
+    depends_on:
+      - redis
+    volumes:
+      - ./R:/web_R/R
+
+  worker_r:
+    build:
+      context: ./worker_R
+      dockerfile: Dockerfile
+    depends_on:
+      - redis
+    volumes:
+      - ./R:/worker_R/R
   
   redis:
     image: redis
