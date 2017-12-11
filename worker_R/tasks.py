@@ -47,7 +47,7 @@ def run(cmd):
     #     out.close()
     #     log.close()
     try:
-        out = sub.check_output(cmd, stderr=sub.STDOUT)
+        out = sub.check_output(cmd, stderr=sub.STDOUT, shell=True)
         return out
     except sub.CalledProcessError as cpe:
         return cpe.output
