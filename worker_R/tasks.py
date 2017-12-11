@@ -35,7 +35,7 @@ def r_script(task):
     return out
 
 # Run separate process from cmd
-def run(cmd, outFile, logFile):
+def run(cmd):
     # out = open(outFile, "w+")
     # log = open(logFile, "w+")
     # try:
