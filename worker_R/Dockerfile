@@ -5,8 +5,8 @@ RUN apt-get update -y
 RUN apt-get install -y python3-pip
 RUN apt-get install -y build-essential libssl-dev libffi-dev libpq-dev python3-dev libfreetype6-dev libxft-dev
 
-ENV CELERY_BROKER_URL redis://redis:6379/0
-ENV CELERY_RESULT_BACKEND redis://redis:6379/0
+ENV CELERY_BROKER_URL redis://redis:6380/0
+ENV CELERY_RESULT_BACKEND redis://redis:6380/0
 ENV C_FORCE_ROOT true
 
 

@@ -8,7 +8,7 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8262:8200"
-      
+
   web_scipy:
     build:
       context: ./web_SciPy
@@ -17,16 +17,16 @@ services:
     ports:
      - "8260:5000"
     depends_on:
-      - redis
+      - redis_scipy
     volumes:
       - ./SciPy:/web_SciPy/SciPy
-  
+
   worker_scipy:
     build:
       context: ./worker_SciPy
       dockerfile: Dockerfile
     depends_on:
-      - redis
+      - redis_scipy
     volumes:
       - ./SciPy:/worker_SciPy/SciPy
 
@@ -38,7 +38,7 @@ services:
     ports:
      - "8261:5000"
     depends_on:
-      - redis
+      - redis_r
     volumes:
       - ./R:/web_R/R
 
@@ -47,9 +47,16 @@ services:
       context: ./worker_R
       dockerfile: Dockerfile
     depends_on:
-      - redis
+      - redis_r
     volumes:
       - ./R:/worker_R/R
-  
-  redis:
+
+  redis_scipy:
     image: redis
+    ports:
+     - "6379:6379"
+
+  redis_r:
+    image: redis
+    ports:
+     - "6380:6379"
