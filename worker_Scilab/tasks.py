@@ -7,11 +7,11 @@ from taskModel import Task
 
 
 env=os.environ
-CELERY_BROKER_URL=env.get('CELERY_BROKER_URL','redis_scipy://localhost:6379'),
-CELERY_RESULT_BACKEND=env.get('CELERY_RESULT_BACKEND','redis_scipy://localhost:6379')
+CELERY_BROKER_URL=env.get('CELERY_BROKER_URL','redis_scilab://localhost:6383'),
+CELERY_RESULT_BACKEND=env.get('CELERY_RESULT_BACKEND','redis_scilab://localhost:6383')
 
 
-celery= Celery('tasks',
+celery= Celery('Silab_tasks',
                 broker=CELERY_BROKER_URL,
                 backend=CELERY_RESULT_BACKEND)
 
@@ -22,14 +22,15 @@ def add(x, y):
     return x + y
 
 # Celery task to run SciPy script
-@celery.task(name='SciPy_broker.py_script', trail=True)
-def py_script(task):                                        #TODO: replace task for timestamp
+@celery.task(name='Scilab_broker.Scilab_script', trail=True)
+def sl_script(task):
     # save output and Error in separate files
-    # folder = task.folder                                    #TODO: getfolder from time
+    # folder = task.folder
     folder = task.getFolder()
     os.chdir(folder)
-    command = ("python3 {0}".format(task.name))              #TODO: get filename
-    out = run (command, task.outName, task.logName)         #TODO: get out/log filenames
+    command = ("../../scilab-6.0.0/bin/scilab-cli -f {0} -nb".format(task.name))
+    # out = run (command, task.outName, task.logName)      
+    out = run (command, task.getOutPath(), task.getLogPath())
     return out
 
 # Run separate process from cmd

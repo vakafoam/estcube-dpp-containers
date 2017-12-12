@@ -17,7 +17,7 @@ import time
 env=os.environ
 app = Flask(__name__)
 CURRENT_FOLDER = os.path.dirname(os.path.realpath(__file__))
-ALLOWED_EXTENSIONS = set(['txt', 'py'])
+ALLOWED_EXTENSIONS = set(['sce', 'sci'])
 
 # Crossdomain decorator for access - control - allow - origin
 def crossdomain(origin=None, methods=None, headers=None,
@@ -100,7 +100,8 @@ def upload_file():
             flash('No selected file')
             return redirect(request.url)
         if file:
-            task = Task("SciPy", "py")
+            extension = file.filename.split(".")[-1]
+            task = Task("Scilab", extension)
             file.save(task.getScriptPath())
             #### Sending script to Celery worker
             r = r_process(task)
@@ -123,7 +124,8 @@ def frontend_connect():
     if request.method == 'POST':
         file = request.files['file']
         if file:
-            task = Task("SciPy", "py")
+            extension = file.filename.split(".")[-1]
+            task = Task("Scilab", extension)
             file.save(task.getScriptPath())
             #### Sending script to Celery worker
             r = r_process(task)
@@ -131,7 +133,7 @@ def frontend_connect():
 
 # Send script for Celery execution
 def r_process(t):
-    task = celery.send_task('SciPy_broker.py_script', args=[t], kwargs={})
+    task = celery.send_task('Scilab_broker.Scilab_script', args=[t], kwargs={})
     # async_res = py_script.apply_async(args=[task,])
     id = task.id
     t.setTaskID(id)

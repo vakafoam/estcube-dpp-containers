@@ -1,0 +1,10 @@
+apt-get update
+apt-get -f install
+apt-get install --yes wget
+
+wget http://www.scilab.org/download/5.5.2/scilab-5.5.2.bin.linux-x86_64.tar.gz
+http://www.scilab.org/download/6.0.0/scilab-6.0.0.bin.linux-x86_64.tar.gz
+cd <scilab-path>
+tar xzvf scilab-5.5.2.bin.linux-x86_64.tar.gz
+
+apt-get install --yes libX11-6

@@ -51,6 +51,27 @@ services:
     volumes:
       - ./R:/worker_R/R
 
+  web_scilab:
+    build:
+      context: ./web_Scilab
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+     - "8263:5000"
+    depends_on:
+      - redis_scilab
+    volumes:
+      - ./Scilab:/web_Scilab/Scilab
+
+  worker_scilab:
+    build:
+      context: ./worker_Scilab
+      dockerfile: Dockerfile
+    depends_on:
+      - redis_scilab
+    volumes:
+      - ./Scilab:/web_Scilab/Scilab
+
   redis_scipy:
     image: redis
     ports:
@@ -60,3 +81,8 @@ services:
     image: redis
     ports:
      - "6380:6379"
+
+  redis_scilab:
+    image: redis
+    ports:
+     - "6383:6379"
