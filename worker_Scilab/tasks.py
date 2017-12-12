@@ -28,7 +28,7 @@ def sl_script(task):
     # folder = task.folder
     folder = task.getFolder()
     os.chdir(folder)
-    command = ("../../scilab-6.0.0/bin/scilab-cli -f {0} -nb".format(task.name))
+    command = ("../../scilab-6.0.0/bin/scilab-adv-cli -f {0} -nwni".format(task.name))
     # out = run (command, task.outName, task.logName)      
     out = run (command, task.getOutPath(), task.getLogPath())
     return out
