@@ -54,15 +54,15 @@ export class PlatformComponent implements OnInit {
 
     upload() {
         this.resultReceived = false;
-        this.submitSelected()
-        
-        console.log('Url: '+this.getURL());        
+        this.submitSelected();
+
+        console.log('Url: '+this.getURL());
         this.service.makeFileRequest(this.getURL(), [], this.scriptFile) // to flask broker
             .subscribe((res) => {
                 console.log(res);
                 this.result = res;
                 this.resultReceived = true;
-                
+
             }, (error) => {
                 console.error(error);
             });

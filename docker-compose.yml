@@ -70,7 +70,7 @@ services:
     depends_on:
       - redis_scilab
     volumes:
-      - ./Scilab:/web_Scilab/Scilab
+      - ./Scilab:/worker_Scilab/Scilab
 
   redis_scipy:
     image: redis
