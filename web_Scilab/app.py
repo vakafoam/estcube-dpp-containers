@@ -143,7 +143,7 @@ def handleResults(task):
     res = AsyncResult(task.getTaskID(), app = celery)
     while (1):
         if (res.ready()):
-            # task.readLog()
+            task.readLog()
             task.readOut()
             task.readImage()
             result = jsonify(task.result)
