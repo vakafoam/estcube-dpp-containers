@@ -23,13 +23,13 @@ def add(x, y):
 
 # Celery task to run SciPy script
 @celery.task(name='SciPy_broker.py_script', trail=True)
-def py_script(task):                                        #TODO: replace task for timestamp
+def py_script(task):                                        
     # save output and Error in separate files
-    # folder = task.folder                                    #TODO: getfolder from time
+    # folder = task.folder
     folder = task.getFolder()
     os.chdir(folder)
-    command = ("python3 {0}".format(task.name))              #TODO: get filename
-    out = run (command, task.outName, task.logName)         #TODO: get out/log filenames
+    command = ("python3 {0}".format(task.name))
+    out = run (command, task.outName, task.logName)
     return out
 
 # Run separate process from cmd
