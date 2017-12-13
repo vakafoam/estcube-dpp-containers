@@ -21,7 +21,7 @@ class Task:
             "folder": self.timestamp,
             "status": {},
             "log": {},
-            "out": {},
+            "out": [],
             "image": {}
         }
 
@@ -72,7 +72,7 @@ class Task:
             path = self.folder + "/" + f
             with open (path, "r") as out_file:
                 out = out_file.read()
-                self.result["out"] = out
+                self.result["out"].append(out)
 
     def readImage(self):
         # check if file is there, convert to base 64, put to result
