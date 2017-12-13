@@ -11,7 +11,7 @@ CELERY_BROKER_URL=env.get('CELERY_BROKER_URL','redis_scilab://localhost:6383'),
 CELERY_RESULT_BACKEND=env.get('CELERY_RESULT_BACKEND','redis_scilab://localhost:6383')
 
 
-celery= Celery('Silab_tasks',
+celery= Celery('Scilab_tasks',
                 broker=CELERY_BROKER_URL,
                 backend=CELERY_RESULT_BACKEND)
 
@@ -29,7 +29,7 @@ def sl_script(task):
     folder = task.getFolder()
     os.chdir(folder)
     command = ("../../scilab-6.0.0/bin/scilab-adv-cli -f {0} -nwni".format(task.name))
-    # out = run (command, task.outName, task.logName)      
+    # out = run (command, task.outName, task.logName)
     out = run (command, task.getOutPath(), task.getLogPath())
     return out
 
