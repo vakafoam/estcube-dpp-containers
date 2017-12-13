@@ -56,12 +56,23 @@ class Task:
         self.result["log"] = log.read()
         log.close()
 
-    def readOut(self):
+    def readOut2(self):
         # TODO: Add logic to check if file is there
         file = self.getOutPath()
         out = open(file, "r")
         self.result["out"] = out.read()
         out.close()
+
+    def readOut(self):
+        outs = []
+        for file in os.listdir(self.folder):
+            if file.endswith(".out"):
+                outs.append(file)
+        for f in outs:
+            path = self.folder + "/" + f
+            with open (path, "r") as out_file:
+                out = out_file.read()
+                self.result["out"] = out
 
     def readImage(self):
         # check if file is there, convert to base 64, put to result
@@ -69,7 +80,7 @@ class Task:
         images = self.findImages()
         if len(images) != 0:
             for i in images:
-                path = self.folder + "//" + i
+                path = self.folder + "/" + i
                 with open(path, "rb") as image_file:
                     image = image_file.read()
                     encoded_image = str(base64.b64encode(image))
