@@ -1,0 +1,4 @@
+POSTGRES_USER		= postgres
+POSTGRES_PASSWORD	= xxx
+POSTGRES_DB			= estcube
+APP_SECRET_KEY		= secret
