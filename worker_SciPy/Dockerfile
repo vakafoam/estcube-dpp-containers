@@ -22,10 +22,7 @@ RUN sudo pip3 install -r requirements.txt
 # RUN pip3 install --user psycopg2
 # RUN pip3 install numpy scipy matplotlib psycopg2
 
-RUN sudo apt-get install --yes python3-numpy python3-scipy python3-matplotlib
-# RUN DEBIAN_FRONTEND="noninteractive" sudo apt-get install python3-numpy
-# RUN DEBIAN_FRONTEND="noninteractive" sudo apt-get install python3-scipy
-# RUN DEBIAN_FRONTEND="noninteractive" sudo apt-get install python3-matplotlib
+RUN sudo apt-get install --yes python3-numpy python3-scipy python3-matplotlib python3-psycopg2
 
 # run the worker
 #ENTRYPOINT ['celery']
