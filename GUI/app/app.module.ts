@@ -3,16 +3,19 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { PlatformComponent } from './platform/platform.component';
+import { SpinnerComponent } from './platform/spinner/spinner.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-    imports: [ 
+    imports: [
         BrowserModule,
         ReactiveFormsModule ],
-    declarations: [ 
+    declarations: [
         AppComponent,
-        PlatformComponent ],
+        PlatformComponent,
+        SpinnerComponent
+       ],
     bootstrap: [ AppComponent ]
 })
 

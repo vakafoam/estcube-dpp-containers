@@ -35,7 +35,9 @@ var UploadService = (function () {
             console.log("Request opened");
             xhr.send(formData);
             console.log("Request sent");
-        }, function (err) { return Observable_1.Observable.throw(err); });
+        }, function (err) {
+            return Observable_1.Observable.throw(err);
+        });
     };
     UploadService = __decorate([
         core_1.Injectable(), 

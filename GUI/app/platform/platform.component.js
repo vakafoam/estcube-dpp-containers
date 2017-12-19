@@ -20,6 +20,7 @@ var PlatformComponent = (function () {
         this.platforms = constants_1.PLATFORM;
         this.platformArr = [];
         this.resultReceived = false;
+        this.loader = false;
     }
     PlatformComponent.prototype.ngOnInit = function () {
         this.platformArr = Object.keys(this.platforms).filter(Number);
@@ -38,6 +39,7 @@ var PlatformComponent = (function () {
         return constants_2.URLS[this.selectedPlatform];
     };
     PlatformComponent.prototype.fileChange = function (event) {
+        this.error = null;
         this.scriptFile = event.target.files[0];
         console.log("file chosen");
         console.log(this.scriptFile.name);
@@ -46,22 +48,32 @@ var PlatformComponent = (function () {
         var _this = this;
         this.resultReceived = false;
         this.submitSelected();
+        this.loader = true;
         console.log('Url: ' + this.getURL());
         this.service.makeFileRequest(this.getURL(), [], this.scriptFile) // to flask broker
             .subscribe(function (res) {
-            console.log(res);
+            console.log("Result: ", res);
             _this.result = res;
             _this.resultReceived = true;
+            _this.loader = false;
         }, function (error) {
-            console.error(error);
+            _this.loader = false;
+            if (!error) {
+                _this.error = "! Server Error ! File format is not supported";
+            }
+            else {
+                _this.error = "! Server Error ! " + error;
+            }
+            console.error("ERROR: ", error);
         });
     };
     PlatformComponent.prototype.imageFromResult = function () {
         var encodedImage = this.result['image'];
-        if (encodedImage != '') {
+        if (encodedImage.toString() != '[object Object]') {
+            console.log("Encoded image: ", encodedImage.toString());
             return this.result['image'];
         }
-        return 'No image to show';
+        return;
     };
     PlatformComponent = __decorate([
         core_1.Component({

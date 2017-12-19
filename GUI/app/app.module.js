@@ -12,6 +12,7 @@ var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var app_component_1 = require('./app.component');
 var platform_component_1 = require('./platform/platform.component');
+var spinner_component_1 = require('./platform/spinner/spinner.component');
 var forms_1 = require('@angular/forms');
 var AppModule = (function () {
     function AppModule() {
@@ -23,7 +24,9 @@ var AppModule = (function () {
                 forms_1.ReactiveFormsModule],
             declarations: [
                 app_component_1.AppComponent,
-                platform_component_1.PlatformComponent],
+                platform_component_1.PlatformComponent,
+                spinner_component_1.SpinnerComponent
+            ],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])

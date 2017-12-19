@@ -21,7 +21,9 @@ export class PlatformComponent implements OnInit {
     private selectedPlatform: string;
     private scriptFile: File;
     private result;
-    private resultReceived: Boolean = false;
+    private resultReceived: boolean = false;
+    public loader: boolean = false;
+    public error: string;
 
 
     constructor(private formB: FormBuilder, private service: UploadService) { }
@@ -47,6 +49,7 @@ export class PlatformComponent implements OnInit {
     }
 
     fileChange(event) {
+      this.error = null;
         this.scriptFile = event.target.files[0];
         console.log("file chosen");
         console.log(this.scriptFile.name);
@@ -55,26 +58,33 @@ export class PlatformComponent implements OnInit {
     upload() {
         this.resultReceived = false;
         this.submitSelected();
+        this.loader = true;
 
         console.log('Url: '+this.getURL());
         this.service.makeFileRequest(this.getURL(), [], this.scriptFile) // to flask broker
             .subscribe((res) => {
-                console.log(res);
+                console.log("Result: ", res);
                 this.result = res;
                 this.resultReceived = true;
-
+                this.loader = false;
             }, (error) => {
-                console.error(error);
+                this.loader = false;
+                if (!error) {
+                  this.error = "! Server Error ! File format is not supported";
+                } else {
+                  this.error = "! Server Error ! " + error;
+                }
+                console.error("ERROR: ", error);
             });
     }
 
     imageFromResult(): string {
         let encodedImage = this.result['image'];
-        if (encodedImage!='') {
+        if (encodedImage.toString() != '[object Object]') {
+          console.log("Encoded image: ", encodedImage.toString());
             return this.result['image'];
         }
-        return 'No image to show'
+        return;
     }
-
-
+    
 }
