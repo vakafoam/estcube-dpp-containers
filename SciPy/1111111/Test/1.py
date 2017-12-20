@@ -12,6 +12,7 @@ Ty = Tx
 
 tX = 11.86*np.cos(2*pi/0.81*Tx-1.32) + 0.64*Tx+4*((0.5-np.random.rand(num_points))*np.exp(2*np.random.rand(num_points)**2))
 tY = -32.14*np.cos(2*np.pi/0.8*Ty-1.94) + 0.15*Ty+7*((0.5-np.random.rand(num_points))*np.exp(2*np.random.rand(num_points)**2))
+print(tX)
 
 # Fit the first set
 fitfunc = lambda p, x: p[0]*np.cos(2*np.pi/p[1]*x+p[2]) + p[3]*x # Target function
@@ -21,6 +22,7 @@ p1, success = optimize.leastsq(errfunc, p0[:], args=(Tx, tX))
 
 
 time = np.linspace(Tx.min(), Tx.max(), 100)
+plt.figure(figsize=(6,6))   # setting the image size
 plt.plot(Tx, tX, "ro", time, fitfunc(p1, time), "r-") # Plot of the data and the fit
 # plt.savefig('graph.png')
 
@@ -45,5 +47,6 @@ plt.text(0.8, 0.07,
          horizontalalignment='center',
          verticalalignment='center',
          transform=ax.transAxes)
-# plt.savefig('graph2.png')
+plt.savefig('graph2.png')
 plt.show()
+Td = linspace(2,3.,4.,3.,3.)     # Produces an error for test/demonstration
