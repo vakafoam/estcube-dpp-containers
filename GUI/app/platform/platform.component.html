@@ -42,11 +42,11 @@
             </div>
         </div>
         <div class="col-md-6" style="padding-left: 20px">
-            <div class="row"><h4>Plot</h4></div>
-            <div class="row" style="min-height:100px;border:1px solid #AAA; background: #dee1e5">
-                <img *ngIf="resultReceived && imageFromResult()" [attr.src]="imageFromResult()"/>
-                <p *ngIf="resultReceived && !imageFromResult()">No image to show</p>
+            <div class="row" ><h4>Plot</h4></div>
+            <div class="row" *ngIf="!imageFromResult()" style="min-height:100px;border:1px solid #AAA; background: #dee1e5">
+                <p *ngIf="resultReceived">No image to show</p>
             </div>
+            <img *ngIf="resultReceived && imageFromResult()" [attr.src]="imageFromResult()"/>
         </div>
     </div>
     <div class="row">

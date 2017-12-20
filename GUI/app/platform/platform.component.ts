@@ -79,12 +79,12 @@ export class PlatformComponent implements OnInit {
     }
 
     imageFromResult(): string {
-        let encodedImage = this.result['image'];
-        if (encodedImage.toString() != '[object Object]') {
+        let encodedImage = null;
+        if (this.resultReceived && this.result['image'].toString() != '[object Object]') {
+          encodedImage = this.result['image'];
           console.log("Encoded image: ", encodedImage.toString());
-            return this.result['image'];
         }
-        return;
+        return encodedImage;
     }
-    
+
 }

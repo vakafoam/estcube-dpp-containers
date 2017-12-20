@@ -68,12 +68,12 @@ var PlatformComponent = (function () {
         });
     };
     PlatformComponent.prototype.imageFromResult = function () {
-        var encodedImage = this.result['image'];
-        if (encodedImage.toString() != '[object Object]') {
+        var encodedImage = null;
+        if (this.resultReceived && this.result['image'].toString() != '[object Object]') {
+            encodedImage = this.result['image'];
             console.log("Encoded image: ", encodedImage.toString());
-            return this.result['image'];
         }
-        return;
+        return encodedImage;
     };
     PlatformComponent = __decorate([
         core_1.Component({
