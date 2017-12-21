@@ -16,15 +16,7 @@ WORKDIR /worker_SciPy
 
 # install requirements
 RUN sudo pip3 install -r requirements.txt
-# RUN pip3 install --user numpy
-# RUN pip3 install --user scipy
-# RUN pip3 install --user matplotlib
-# RUN pip3 install --user psycopg2
-# RUN pip3 install numpy scipy matplotlib psycopg2
-
 RUN sudo apt-get install --yes python3-numpy python3-scipy python3-matplotlib python3-psycopg2
 
 # run the worker
-#ENTRYPOINT ['celery']
-#CMD ['-A','tasks', 'worker','--loglevel=info']
 ENTRYPOINT celery -A tasks worker --loglevel=info

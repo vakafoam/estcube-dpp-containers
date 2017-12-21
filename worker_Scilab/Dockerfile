@@ -20,7 +20,5 @@ RUN sudo pip3 install -r requirements.txt
 RUN wget http://www.scilab.org/download/6.0.0/scilab-6.0.0.bin.linux-x86_64.tar.gz
 RUN tar xzvf scilab-6.0.0.bin.linux-x86_64.tar.gz
 
-# RUN sudo apt-get install --yes python3-numpy python3-scipy python3-matplotlib
-
 # run the worker
 ENTRYPOINT celery -A tasks worker --loglevel=info

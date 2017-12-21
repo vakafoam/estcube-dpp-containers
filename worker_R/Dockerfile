@@ -19,12 +19,7 @@ RUN sudo pip3 install -r requirements.txt
 RUN apt-get -y install r-base
 RUN sudo su - -c "R -e \"install.packages('DBI', repos = 'http://cran.rstudio.com/')\""
 RUN sudo su - -c "R -e \"install.packages('RPostgreSQL', repos = 'http://cran.rstudio.com/')\""
-# RUN sudo su - -c "R -e \"install.packages('ggplot2', repos = 'http://cran.rstudio.com/')\""
 RUN sudo apt-get install --yes r-cran-ggplot2
-
-
-# RUN sudo apt-get install --yes python3-numpy python3-scipy python3-matplotlib
-
 
 # run the worker
 ENTRYPOINT celery -A tasks worker --loglevel=info
