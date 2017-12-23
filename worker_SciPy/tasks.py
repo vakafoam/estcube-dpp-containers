@@ -14,12 +14,6 @@ celery= Celery('tasks',
                 broker=CELERY_BROKER_URL,
                 backend=CELERY_RESULT_BACKEND)
 
-
-@celery.task(name='mytasks.add')
-def add(x, y):
-    time.sleep(1) # lets sleep for a while before doing the gigantic addition task!
-    return x + y
-
 # Celery task to run SciPy script
 @celery.task(name='SciPy_broker.py_script', trail=True)
 def py_script(task):

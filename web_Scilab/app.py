@@ -61,28 +61,6 @@ def crossdomain(origin=None, methods=None, headers=None,
         return update_wrapper(wrapped_function, f)
     return decorator
 
-@app.route('/add/<int:param1>/<int:param2>')
-def add(param1,param2):
-    # task = celery.send_task('mytasks.add', args=[param1, param2], kwargs={})
-    # id = task.id
-    # res = celery.AsyncResult(id)
-    # while res.state == states.PENDING:
-    #     time.sleep(2)
-    #     res = celery.AsyncResult(id)
-    # return str(res.result)
-
-    result = sendTask(args=[param1,param2])
-    return result.get()
-
-def sendTask(param1,param2):
-    task = celery.send_task('mytasks.add', args=[param1, param2], kwargs={})
-    id = task.id
-    res = celery.AsyncResult(id)
-    while res.state == states.PENDING:
-        time.sleep(2)
-        res = celery.AsyncResult(id)
-    return str(res.result)
-
 #### Receive script file when uploaded, save with unique name
      ## Route for the back test without GUI
 @app.route('/task', methods=['GET', 'POST'])
@@ -134,7 +112,6 @@ def frontend_connect():
 # Send script for Celery execution
 def r_process(t):
     task = celery.send_task('Scilab_broker.Scilab_script', args=[t], kwargs={})
-    # async_res = py_script.apply_async(args=[task,])
     id = task.id
     t.setTaskID(id)
     handleResults(t)

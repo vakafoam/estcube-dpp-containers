@@ -61,28 +61,6 @@ def crossdomain(origin=None, methods=None, headers=None,
         return update_wrapper(wrapped_function, f)
     return decorator
 
-@app.route('/add/<int:param1>/<int:param2>')
-def add(param1,param2):
-    # task = celery.send_task('mytasks.add', args=[param1, param2], kwargs={})
-    # id = task.id
-    # res = celery.AsyncResult(id)
-    # while res.state == states.PENDING:
-    #     time.sleep(2)
-    #     res = celery.AsyncResult(id)
-    # return str(res.result)
-
-    result = sendTask(args=[param1,param2])
-    return result.get()
-
-def sendTask(param1,param2):
-    task = celery.send_task('mytasks.add', args=[param1, param2], kwargs={})
-    id = task.id
-    res = celery.AsyncResult(id)
-    while res.state == states.PENDING:
-        time.sleep(2)
-        res = celery.AsyncResult(id)
-    return str(res.result)
-
 #### Receive script file when uploaded, save with unique name
      ## Route for the back test without GUI
 @app.route('/task', methods=['GET', 'POST'])
@@ -116,7 +94,7 @@ def upload_file():
     </form>
     '''
 
-    ## Route for the GUI
+## Route for the GUI
 @app.route('/', methods=['POST'])
 @crossdomain(origin='*') # this is for access-control-allow-origin
 def frontend_connect():

@@ -15,13 +15,7 @@ celery= Celery('Scilab_tasks',
                 broker=CELERY_BROKER_URL,
                 backend=CELERY_RESULT_BACKEND)
 
-
-@celery.task(name='mytasks.add')
-def add(x, y):
-    time.sleep(1) # lets sleep for a while before doing the gigantic addition task!
-    return x + y
-
-# Celery task to run SciPy script
+# Celery task to run Scilab script
 @celery.task(name='Scilab_broker.Scilab_script', trail=True)
 def sl_script(task):
     # save output and Error in separate files
