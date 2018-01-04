@@ -5,9 +5,9 @@ library(RPostgreSQL)
 
 # Initialize DB connection
 drv <- dbDriver("PostgreSQL")
-con <- dbConnect(drv, dbname = "DPP",
+con <- dbConnect(drv, dbname = "estcube",
                  host = "localhost", port = 5432,
-                 user = "postgres", password = 'retipu')
+                 user = "postgres", password = 'xxx')
 
 dbExistsTable(con, "weather")
 
@@ -18,15 +18,15 @@ dt <- as.table(trial)
 dt
 
 # Write data to DB
-dbWriteTable(con, "weather", 
-             value = data.frame(humid=dt[1,1],id=dt[1,2],temp=dt[1,3]), 
+dbWriteTable(con, "weather",
+             value = data.frame(humid=dt[1,1],id=dt[1,2],temp=dt[1,3]),
              append = TRUE, row.names = FALSE)
 
-# query the data from postgreSQL 
+# query the data from postgreSQL
 df_postgres <- dbGetQuery(con, "SELECT * from weather")
 df_postgres
 
-# Creating new data 
+# Creating new data
 # matrix of random values + hum
 set.seed(42)
 m=3
@@ -39,11 +39,11 @@ for (i in 1:m) {
   }
 }
 # Write data to DB
-dbWriteTable(con, "weather", 
-             value = dframe, 
+dbWriteTable(con, "weather",
+             value = dframe,
              append = TRUE, row.names = FALSE)
 
-# query the data from postgreSQL 
+# query the data from postgreSQL
 downloaded <- dbGetQuery(con, "SELECT * from weather")
 downloaded
 
@@ -62,12 +62,12 @@ dbGetRowCount(downloaded)
 install.packages("ggplot2")
 require(ggplot2)
 jpeg('G:/PythonCodes/data-processing-platform/Broker-R/R/rplot.jpg')
-ggplot(downloaded, aes(x = temp, y = humid, fill = humid)) + 
+ggplot(downloaded, aes(x = temp, y = humid, fill = humid)) +
   geom_boxplot() + theme_bw()
 dev.off()
 
 # Secong approach
-ggplot(downloaded, aes(x = temp, y = humid, fill = humid)) + 
+ggplot(downloaded, aes(x = temp, y = humid, fill = humid)) +
   geom_boxplot() + theme_bw()+
   ggsave('G:/PythonCodes/data-processing-platform/Broker-R/R/fig1.png',width=6, height=4,dpi=300)
 

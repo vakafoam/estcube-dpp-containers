@@ -3,6 +3,6 @@
 import dbConnection
 from .. import test2
 
-fetch = dbConnection.doQuery("SELECT * FROM weather")
+fetch = dbConnection.doQuery("SELECT * FROM table")
 print (fetch)
 print (test2.out)

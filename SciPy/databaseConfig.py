@@ -2,5 +2,5 @@
 
 HOST = 'localhost'
 USER = 'postgres'
-PASS = 'retipu'
-DATABASE = 'DPP'
+PASS = 'xxx'
+DATABASE = 'estcube'

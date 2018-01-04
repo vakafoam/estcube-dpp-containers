@@ -2,6 +2,6 @@ library(RPostgreSQL)
 
 # Initialize DB connection
 drv <- dbDriver("PostgreSQL")
-con <- dbConnect(drv, dbname = "DPP",
+con <- dbConnect(drv, dbname = "estcube",
                  host = "localhost", port = 5432,
-                 user = "postgres", password = 'retipu')
+                 user = "postgres", password = 'xxx')

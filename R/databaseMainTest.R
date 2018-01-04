@@ -5,13 +5,13 @@ library(RPostgreSQL)
 
 # Initialize DB connection
 drv <- dbDriver("PostgreSQL")
-con <- dbConnect(drv, dbname = "DPP",
+con <- dbConnect(drv, dbname = "estcube",
                  host = "localhost", port = 5432,
-                 user = "postgres", password = 'retipu')
+                 user = "postgres", password = 'xxx')
 
 dbExistsTable(con, "weather")
 
-# query the data from postgreSQL 
+# query the data from postgreSQL
 downloaded <- dbGetQuery(con, "SELECT * from weather")
 # downloaded
 
@@ -19,9 +19,9 @@ downloaded <- dbGetQuery(con, "SELECT * from weather")
 dbListTables(con)
 
 # d <- as.data.frame(downloaded)
-# 
+#
 # dbColumnInfo(d)
-# 
+#
 # dbGetStatement(downloaded)
 # dbHasCompleted(downloaded)
 # dbGetRowCount(downloaded)
@@ -30,12 +30,12 @@ dbListTables(con)
 # install.packages("ggplot2")
 # require(ggplot2)
 # jpeg('G:/PythonCodes/data-processing-platform/Broker-R/R/rplot.jpg')
-# ggplot(downloaded, aes(x = temp, y = humid, fill = humid)) + 
+# ggplot(downloaded, aes(x = temp, y = humid, fill = humid)) +
 #   geom_boxplot() + theme_bw()
 # dev.off()
-# 
+#
 # # Secong approach
-# ggplot(downloaded, aes(x = temp, y = humid, fill = humid)) + 
+# ggplot(downloaded, aes(x = temp, y = humid, fill = humid)) +
 #   geom_boxplot() + theme_bw()+
 #   ggsave('G:/PythonCodes/data-processing-platform/Broker-R/R/fig1.png',width=6, height=4,dpi=300)
 
